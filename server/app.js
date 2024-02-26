@@ -33,13 +33,13 @@ app.get("/docs", (req, res) => {
 });
 
 app.get("/api/cohorts", (req, res) => {
-
-  res.sendFile(__dirname + "/cohorts.json")
+  const cohorts = require(`${__dirname}` + "/cohorts.json")
+  res.json(cohorts)
 })
 
 app.get("/api/students", (req, res) => {
-
-  res.sendFile(__dirname + "/students.json")
+  const students = require(`${__dirname}` + "/students.json")
+  res.json(students)
 })
 
 
