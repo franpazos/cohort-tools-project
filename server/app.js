@@ -3,11 +3,18 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
 const PORT = 5005;
+const mongoose = require("mongoose")
+const Cohort = require("./models/Cohort.model.js")
+const Student = require("./models/Student.model.js")
+
 
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
-
+mongoose
+  .connect("mongodb://127.0.0.1:27017/cohort-tools-api")
+  .then(x => console.log(`conected to mongo! database name "${x.connections[0].name}"`))
+  .catch(err => console.error ("error connecting to mongo", err))
 
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
 const app = express();
@@ -24,23 +31,38 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({ origin: ['http://localhost:5173'] }))
 
-// ROUTES - https://expressjs.com/en/starter/basic-routing.html
-// Devs Team - Start working on the routes here:
-// ...
+
 
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
 
-app.get("/api/cohorts", (req, res) => {
-  const cohorts = require(`${__dirname}` + "/cohorts.json")
-  res.json(cohorts)
+
+app.get("/cohorts", (req, res) => {
+  Cohort.find({})
+  .then((cohorts)=>{
+    console.log("retrieved cohorts ->", cohorts)
+    res.status(200).json(cohorts)
+  })
+  .catch((error)=>{
+    console.error("error while the cohort ->", error )
+    res.status(500).json ({ error: "failes to create the cohort"})
+  })
 })
 
-app.get("/api/students", (req, res) => {
-  const students = require(`${__dirname}` + "/students.json")
-  res.json(students)
+
+app.get("/students", (req, res) =>{
+  Student.find({})
+  .then((students)=>{
+    console.log("retriedved students ->", students)
+    res.status(200).json(students)
+  })
+  .catch((error)=>{
+    console.error("error while the student ->", error)
+    res.status(500).json ({ error: "failes to create the student"})
+  })
 })
+
 
 
 // START SERVER
