@@ -1,7 +1,6 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const { model, Schema } = require("mongoose")
 
-const StudentSchema = new Schema({
+const studentSchema = new Schema({
     firstName: {
         type: String,
         required: true
@@ -21,10 +20,10 @@ const StudentSchema = new Schema({
     },
     linkedinUrl: {
         type: String,
-        default: [String]
+        default: ""
     },
     languages: {
-        type: String,
+        type: [String],
         enum: ['English', 'Spanish', 'French', 'German', 'Portuguese', 'Dutch', 'Other']
     },
     program: {
@@ -41,7 +40,7 @@ const StudentSchema = new Schema({
     },
     cohort: {
         type: Schema.Types.ObjectId,
-        ref: 'cohort'
+        ref: 'Cohort'
     },
     projects: {
         type: Array
@@ -51,7 +50,7 @@ const StudentSchema = new Schema({
     timestamps: true
 })
 
-const Student = mongoose.model("Student", StudentSchema)
+const Student = model("Student", studentSchema)
 
 module.exports = Student
 

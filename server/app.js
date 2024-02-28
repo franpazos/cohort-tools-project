@@ -2,11 +2,12 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
-const PORT = 5005;
 const mongoose = require("mongoose")
+
 const Cohort = require("./models/Cohort.model.js")
 const Student = require("./models/Student.model.js")
 
+const PORT = 5005;
 
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
@@ -81,6 +82,7 @@ app.get('/api/students/', (req, res) => {
 
   Student
     .find()
+    .populate("cohort")
     .then(allStudents => res.status(201).json(allStudents))
     .catch(err => res.status(500).json(err))
 })
@@ -89,6 +91,7 @@ app.get('/api/students/cohort/:id', (req, res) => {
   const { id: studentId } = req.params
   Student
     .findById(studentId)
+    .populate("cohort")
     .then(studentInfo => res.status(200).json(studentInfo))
     .catch(err => res.status(500).json(err))
 })
@@ -97,6 +100,7 @@ app.get('/api/students/:id', (req, res) => {
   const { id: studentId } = req.params
   Student
     .findById(studentId)
+    .populate("cohort")
     .then(studentInfo => res.status(200).json(studentInfo))
     .catch(err => res.status(500).json(err))
 })
