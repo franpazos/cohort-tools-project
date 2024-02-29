@@ -39,32 +39,6 @@ app.get("/docs", (req, res) => {
 });
 
 
-app.get("/cohorts", (req, res) => {
-  Cohort
-    .find({})
-    .then((cohorts) => {
-      console.log("retrieved cohorts ->", cohorts)
-      res.status(200).json(cohorts)
-    })
-    .catch((error) => {
-      console.error("error while the cohort ->", error)
-      res.status(500).json({ error: "failes to create the cohort" })
-    })
-})
-
-
-app.get("/students", (req, res) => {
-  Student.find({})
-    .then((students) => {
-      console.log("retriedved students ->", students)
-      res.status(200).json(students)
-    })
-    .catch((error) => {
-      console.error("error while the student ->", error)
-      res.status(500).json({ error: "failes to create the student" })
-    })
-})
-
 
 // ROUTES Students
 
