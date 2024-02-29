@@ -100,10 +100,10 @@ app.delete('/api/students/:id', (req, res) => {
 
 app.post('/api/cohorts', (req, res) => {
 
-  const { cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgres, programManager, leadTeacher, totalHours } = req.body
+  const { cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgress, programManager, leadTeacher, totalHours } = req.body
 
   Cohort
-    .create({ cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgres, programManager, leadTeacher, totalHours })
+    .create({ cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgress, programManager, leadTeacher, totalHours })
     .then(createdCohort => res.status(201).json(createdCohort))
     .catch(err => res.status(500).json(err))
 })
@@ -126,10 +126,10 @@ app.get('/api/cohorts/:id', (req, res) => {
 
 app.put('/api/cohorts/:id', (req, res) => {
   const { id: cohortId } = req.params
-  const { firstName, lastName, email, phone, linkedinUrl, languages, program, background, image, cohort, projects } = req.body
+  const { cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgress, programManager, leadTeacher, totalHours } = req.body
 
   Cohort
-    .findByIdAndUpdate(cohortId, { cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgres, programManager, leadTeacher, totalHours }, { new: true, runValidator: true })
+    .findByIdAndUpdate(cohortId, { cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgress, programManager, leadTeacher, totalHours }, { new: true, runValidator: true })
     .then(updatedCohort => res.status(200).json(updatedCohort))
     .catch(err => res.status(500).json(err))
 })
