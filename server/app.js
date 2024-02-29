@@ -141,7 +141,11 @@ app.delete('/api/cohorts/:id', (req, res) => {
     .catch(err => res.status(500).json(err))
 })
 
+require("./error-handling")(app)
+
 // START SERVER
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+
+module.exports = app
