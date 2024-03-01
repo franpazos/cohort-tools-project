@@ -47,7 +47,7 @@ app.use("/api/students", studentRoutes)
 const cohortsRoutes = require("./Routes/cohort.routes.js")
 app.use("/api/cohorts", cohortsRoutes)
 
-require("./error-handling")(app)
+require("./error-handling").default(app)
 
 // START SERVER
 app.listen(PORT, () => {
