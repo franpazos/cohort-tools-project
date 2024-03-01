@@ -4,8 +4,6 @@ const cookieParser = require("cookie-parser")
 const cors = require("cors")
 const mongoose = require("mongoose")
 
-
-
 const PORT = 5005
 
 // STATIC DATA
@@ -47,7 +45,7 @@ app.use("/api/students", studentRoutes)
 const cohortsRoutes = require("./Routes/cohort.routes.js")
 app.use("/api/cohorts", cohortsRoutes)
 
-require("./error-handling").default(app)
+require("./error-handling")(app)
 
 // START SERVER
 app.listen(PORT, () => {
