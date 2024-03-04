@@ -12,7 +12,7 @@ const studentSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: false
     },
     phone: {
         type: String,
@@ -28,7 +28,7 @@ const studentSchema = new Schema({
     },
     program: {
         type: String,
-        enum: ['Web Dev', 'UX/UI', 'Data Analitics', 'Cybersecurity']
+        enum: ['Web Dev', 'UX/UI', 'Data Analytics', 'Cybersecurity']
     },
     background: {
         type: String,
